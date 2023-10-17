@@ -19,7 +19,7 @@ app.use(globalErrorHandler);
 
 // Test Route
 app.use((req: Request, res: Response) => {
-  res.json("Doc Savvy On Fire 🔥 💧 🔥");
+  res.json("Doxy On Fire 🔥 💧 🔥");
 });
 
 app.use((req: Request, res: Response, next: NextFunction) => {

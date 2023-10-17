@@ -14,6 +14,11 @@ const handleClientError = (error: Prisma.PrismaClientKnownRequestError) => {
   ) {
     message = "Delere failed !!";
     errors = [{ path: "", message }];
+  } else if (error.code === "P2002") {
+    if (error.message) {
+      message = error.message;
+      errors = [{ path: "", message }];
+    }
   }
 
   return {

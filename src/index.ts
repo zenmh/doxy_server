@@ -5,7 +5,7 @@ import app from "./app";
 const run = () => {
   try {
     const server: Server = app.listen(config.port, () =>
-      console.log(`Doc Savvy Running On http://localhost:${config.port}`)
+      console.log(`Doxy Running On http://localhost:${config.port}`)
     );
 
     const exitHandler = () => {

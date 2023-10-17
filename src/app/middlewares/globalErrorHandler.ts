@@ -27,15 +27,16 @@ const globalErrorHandler: ErrorRequestHandler = (
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
+  } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    // console.log("this error from prisma -->", error);
+    const simplifiedError = handleClientError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message!;
+    errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ZodError) {
     const simplifiedError = handleZodError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
-    errorMessages = simplifiedError.errorMessages;
-  } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    const simplifiedError = handleClientError(error);
-    statusCode = simplifiedError.statusCode;
-    message = simplifiedError.message!;
     errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ApiError) {
     statusCode = error?.statusCode;

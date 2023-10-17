@@ -1,10 +1,33 @@
 import prisma from "../../../constants/prisma";
-import { ISignIn, ISignInResponse } from "./auth.interface";
+import { ISignIn, ISignInResponse, ISignUpResponse } from "./auth.interface";
 import ApiError from "../../../errors/ApiError";
 import { createToken } from "../../../helpers/jwt";
 import config from "../../../config";
 import { Secret } from "jsonwebtoken";
-import { matchPassword } from "../../../helpers/bcrypt";
+import { hashPassword, matchPassword } from "../../../helpers/bcrypt";
+import { User } from "@prisma/client";
+
+const signUp = async (data: User): Promise<ISignUpResponse> => {
+  data.password = await hashPassword(data.password);
+
+  const result = await prisma.user.create({ data });
+
+  const { id: userId, role } = result;
+
+  const accessToken = createToken(
+    { userId, role },
+    config.jwt.access_secret as Secret,
+    config.jwt.access_expires_in as string
+  );
+
+  const refreshToken = createToken(
+    { userId, role },
+    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_expires_in as string
+  );
+
+  return { accessToken, refreshToken, result };
+};
 
 const signIn = async ({
   email,
@@ -42,4 +65,4 @@ const signIn = async ({
   return { accessToken, refreshToken };
 };
 
-export const AuthService = { signIn };
+export const AuthService = { signUp, signIn };
