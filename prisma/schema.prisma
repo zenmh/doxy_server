@@ -15,7 +15,7 @@ enum Role {
   SUPER_ADMIN
 }
 
-enum Specialitiy {
+enum Speciality {
   THYROID
   EYE
   NEUROLOGY
@@ -67,7 +67,7 @@ model Doctor {
   address String?
   profileImage String?
 
-  specialitiy Specialitiy
+  speciality Speciality
   experiences String
   practicing_branch String
   branch Branch @default(DHAKA)
@@ -84,7 +84,7 @@ model Doctor {
 model Treatment {
   id String @id @default(uuid())
 
-  name Specialitiy
+  name Speciality
   slots String[]
 
   doctors Doctor[]

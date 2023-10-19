@@ -2,7 +2,7 @@
 CREATE TYPE "Role" AS ENUM ('PATIENT', 'DOCTOR', 'ADMIN', 'SUPER_ADMIN');
 
 -- CreateEnum
-CREATE TYPE "Specialitiy" AS ENUM ('THYROID', 'EYE', 'NEUROLOGY', 'CARDIOLOGY', 'MEDICINE', 'PSYCHIATRY', 'DENTIST', 'ORTHOPEDICS', 'HAEMATOLOGY', 'GYNAECOLOGY');
+CREATE TYPE "Speciality" AS ENUM ('THYROID', 'EYE', 'NEUROLOGY', 'CARDIOLOGY', 'MEDICINE', 'PSYCHIATRY', 'DENTIST', 'ORTHOPEDICS', 'HAEMATOLOGY', 'GYNAECOLOGY');
 
 -- CreateEnum
 CREATE TYPE "Branch" AS ENUM ('BARISHAL', 'CHATTOGRAM', 'DHAKA', 'KHULNA', 'RAJSHAHI', 'RANGPUR', 'MYMENSINGH', 'SYLHET');
@@ -33,7 +33,7 @@ CREATE TABLE "doctors" (
     "contactNo" TEXT,
     "address" TEXT,
     "profileImage" TEXT,
-    "specialitiy" "Specialitiy" NOT NULL,
+    "speciality" "Speciality" NOT NULL,
     "experiences" TEXT NOT NULL,
     "practicing_branch" TEXT NOT NULL,
     "branch" "Branch" NOT NULL DEFAULT 'DHAKA',
@@ -47,7 +47,7 @@ CREATE TABLE "doctors" (
 -- CreateTable
 CREATE TABLE "treatments" (
     "id" TEXT NOT NULL,
-    "name" "Specialitiy" NOT NULL,
+    "name" "Speciality" NOT NULL,
     "slots" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

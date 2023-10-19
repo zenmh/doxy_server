@@ -1,4 +1,4 @@
-import { Branch, Role, Specialitiy } from "@prisma/client";
+import { Branch, Role, Speciality } from "@prisma/client";
 import { z } from "zod";
 
 const ZCreateDoctor = z.object({
@@ -12,10 +12,9 @@ const ZCreateDoctor = z.object({
     contactNo: z.string().optional(),
     address: z.string().optional(),
     profileImage: z.string().optional(),
-    specialitiy: z.enum(
-      [...Object.keys(Specialitiy)] as [string, ...string[]],
-      { required_error: "Speciality is required !!" }
-    ),
+    speciality: z.enum([...Object.keys(Speciality)] as [string, ...string[]], {
+      required_error: "Speciality is required !!",
+    }),
     experiences: z.string({ required_error: "Experience is required !!" }),
     practicing_branch: z.string({
       required_error: "Practicing branch is required !!",

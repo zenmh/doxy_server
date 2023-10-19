@@ -4,8 +4,11 @@ import { ZCreateDoctor } from "./doctor.validation";
 import { DoctorController } from "./doctor.controller";
 
 const router = Router();
-const { createDoctor } = DoctorController;
+const { createDoctor, getDoctors, getDoctor } = DoctorController;
 
-router.post("/", validateRequest(ZCreateDoctor), createDoctor);
+router
+  .post("/", validateRequest(ZCreateDoctor), createDoctor)
+  .get("/", getDoctors)
+  .get("/:id", getDoctor);
 
 export const DoctorRoutes = router;
