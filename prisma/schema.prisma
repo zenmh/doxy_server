@@ -39,6 +39,16 @@ enum Branch {
   SYLHET
 }
 
+enum ProductCategory {
+  MEDICINE
+  DEVICES
+  BABY_AND_MOM_CARE
+  NUTRITIONS_AND_DRINKS
+  PERSONAL_CARE
+  SUPPLEMENTS_AND_VITAMINS
+  HERBAL_AND_HOMIOPATHY
+}
+
 model User {
   id String @id @default(uuid())
   
@@ -95,4 +105,17 @@ model Treatment {
   @@map("treatments")
 }
 
+model Product {
+  id String @id @default(uuid())
 
+  image String
+  name String
+  company String
+  price Float
+  category ProductCategory
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("products")
+}

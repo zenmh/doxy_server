@@ -7,6 +7,9 @@ CREATE TYPE "Speciality" AS ENUM ('THYROID', 'EYE', 'NEUROLOGY', 'CARDIOLOGY', '
 -- CreateEnum
 CREATE TYPE "Branch" AS ENUM ('BARISHAL', 'CHATTOGRAM', 'DHAKA', 'KHULNA', 'RAJSHAHI', 'RANGPUR', 'MYMENSINGH', 'SYLHET');
 
+-- CreateEnum
+CREATE TYPE "ProductCategory" AS ENUM ('MEDICINE', 'DEVICES', 'BABY_AND_MOM_CARE', 'NUTRITIONS_AND_DRINKS', 'PERSONAL_CARE', 'SUPPLEMENTS_AND_VITAMINS', 'HERBAL_AND_HOMIOPATHY');
+
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
@@ -53,6 +56,20 @@ CREATE TABLE "treatments" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "treatments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "products" (
+    "id" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "company" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "category" "ProductCategory" NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
